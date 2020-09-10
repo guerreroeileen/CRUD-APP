@@ -16,6 +16,13 @@
           <label>Edad</label>
           <input type="number" formControlName="edad" class="form-control">
         </div>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert"  *ngIf="mostrarAlerta" >
+          <strong>Tutorial Yo Androide!</strong> {{messageInfo}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
     </div>
