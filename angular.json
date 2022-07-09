@@ -38,7 +38,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
@@ -112,5 +112,8 @@
       }
     }
   },
-  "defaultProject": "CRUD-APP"
+  "defaultProject": "CRUD-APP",
+  "cli": {
+    "analytics": false
+  }
 }

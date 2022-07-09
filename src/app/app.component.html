@@ -16,10 +16,9 @@
           <label>Edad</label>
           <input type="number" formControlName="edad" class="form-control">
         </div>
-
-        <div class="alert alert-warning alert-dismissible fade show" role="alert"  *ngIf="mostrarAlerta" >
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mostrarAlerta">
           <strong>Tutorial Yo Androide!</strong> {{messageInfo}}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()" >
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -28,9 +27,7 @@
     </div>
   </mat-tab>
 
-
   <mat-tab label="Listar">
-
     <div style="padding: 10%;">
       <table class="table">
         <thead>
@@ -54,34 +51,10 @@
           </tr>
         </tbody>
       </table>
-
     </div>
-
-
-
   </mat-tab>
 
-
-
-
-
 </mat-tab-group>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <main>
   <router-outlet></router-outlet>

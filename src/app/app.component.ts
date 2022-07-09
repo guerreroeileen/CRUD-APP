@@ -13,9 +13,9 @@ import { CRUDServiceService } from './crudservice.service';
 export class AppComponent implements OnInit {
   title = 'CRUD-APP';
 
-  personas:any= [];
-  messageInfo:string;
-  mostrarAlerta:boolean;
+  personas: any = [];
+  messageInfo: string;
+  mostrarAlerta: boolean;
 
   productForm: FormGroup;
 
@@ -51,25 +51,22 @@ export class AppComponent implements OnInit {
       error => {
         console.log("No se pudo guardar el producto: " + error);
         console.error(error);
-        this.messageInfo =  "No se pudo guardar la persona: " + error.message;
-    }
+        this.messageInfo = "No se pudo guardar la persona: " + error.message;
+      }
     );
 
   }
 
-  cerrarAlerta(){
+  cerrarAlerta() {
     this.mostrarAlerta = false;
   }
 
 
-  delete(persona:any){
-    console.log(persona)
-    this.CRUDServiceService.delete(persona).subscribe(res=>{
+  delete(persona: any) {
+    this.CRUDServiceService.delete(persona).subscribe(res => {
       this.personas.pop(res);
     },
-    error=>{console.log(error)}
     )
   }
-
 
 }
