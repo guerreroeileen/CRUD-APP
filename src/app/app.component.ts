@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 import { CRUDServiceService } from './crudservice.service';
+import { Persona } from './models/Persona';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -13,7 +17,9 @@ import { CRUDServiceService } from './crudservice.service';
 export class AppComponent implements OnInit {
   title = 'CRUD-APP';
 
-  personas: any = [];
+  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo', 'edad', 'numeroDocumentoIdentificacion'];
+
+  dataSource: any;
   messageInfo: string;
   mostrarAlerta: boolean;
 
@@ -21,15 +27,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.productForm = this.fb.group({
-      nombre: [''],
-      apellido: [''],
-      edad: Number,
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      numeroDocumentoIdentificacion: ['', Validators.required],
+      correo: ['', Validators.required],
+      edad: [Number, Validators.required],
     });
     this.messageInfo = "Persona agregada correctamente :)";
     this.mostrarAlerta = false;
 
-    this.CRUDServiceService.getAll().subscribe(res => {
-      this.personas = res;
+    this.CRUDServiceService.getAll(0, 10, false).subscribe(res => {
+      this.dataSource = new MatTableDataSource<Persona>(res.content);
+      this.dataSource.paginator = this.paginator;
     },
       error => { console.log(error) }
     )
@@ -45,7 +54,7 @@ export class AppComponent implements OnInit {
     this.mostrarAlerta = true;
     this.CRUDServiceService.save(this.productForm.value).subscribe(
       res => {
-        this.personas.push(res);
+        this.dataSource.push(res);
         this.productForm.reset();
       },
       error => {
@@ -64,9 +73,12 @@ export class AppComponent implements OnInit {
 
   delete(persona: any) {
     this.CRUDServiceService.delete(persona).subscribe(res => {
-      this.personas.pop(res);
+      this.dataSource.pop(res);
     },
     )
   }
+
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
 
 }

@@ -1,57 +1,107 @@
 <mat-tab-group dynamicHeight>
 
   <mat-tab label="Crear">
-    <div style="padding: 15%;">
-      <h1>Crear persona</h1>
-      <form [formGroup]="productForm" (ngSubmit)="submitForm()" novalidate>
-        <div class="form-group">
-          <label>Nombre</label>
-          <input type="text" formControlName="nombre" class="form-control" maxlength="20">
-        </div>
-        <div class="form-group">
-          <label>Apellido</label>
-          <input class="form-control" formControlName="apellido" maxlength="50">
-        </div>
-        <div class="form-group">
-          <label>Edad</label>
-          <input type="number" formControlName="edad" class="form-control">
-        </div>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mostrarAlerta">
-          <strong>Tutorial Yo Androide!</strong> {{messageInfo}}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-      </form>
+    <div class="formularioRegistro">
+
+      <mat-card-header>
+        <mat-card-title>Crear persona</mat-card-title>
+        <mat-card-subtitle>Todos los campos son obligatorios</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card class="example-card">
+
+        <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Nombre</mat-label>
+              <input matInput type="text" formControlName="nombre">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Apellido</mat-label>
+              <input matInput type="text" formControlName="apellido">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Numero de documento</mat-label>
+              <input matInput type="number" formControlName="numeroDocumentoIdentificacion">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Correo electronico</mat-label>
+              <input matInput type="email" formControlName="correo">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Edad</mat-label>
+              <input matInput type="number" formControlName="edad">
+            </mat-form-field>
+          </div>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mostrarAlerta">
+            <strong>Tutorial Yo Androide!:</strong> {{messageInfo}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlerta()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <button type="submit" mat-raised-button color="primary" [disabled]="productForm.invalid">Guardar</button>
+        </form>
+
+      </mat-card>
+
+      
     </div>
   </mat-tab>
 
   <mat-tab label="Listar">
-    <div style="padding: 10%;">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Edad</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of personas">
-            <th scope="row">{{item.id}}</th>
-            <td>{{item.nombre}}</td>
-            <td>{{item.apellido}}</td>
-            <td>{{item.edad}}</td>
-            <td>
-              <button type="button" class="btn btn-danger" (click)='delete(item)'>Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
+ 
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef>Apellido</th>
+          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef>Correo</th>
+          <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edad">
+          <th mat-header-cell *matHeaderCellDef>Edad</th>
+          <td mat-cell *matCellDef="let element"> {{element.edad}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="numeroDocumentoIdentificacion">
+          <th mat-header-cell *matHeaderCellDef>Documento</th>
+          <td mat-cell *matCellDef="let element"> {{element.numeroDocumentoIdentificacion}} </td>
+        </ng-container>
+    
+
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+    
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]"
+                     showFirstLastButtons 
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
     </div>
+
+
   </mat-tab>
 
 </mat-tab-group>

@@ -1,1 +1,11 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+.formularioRegistro{
+    padding-left: 30%;
+    padding-right: 30%;
+    margin-top: 3%;
+}
+
+table {
+    width: 100%;
+  }
