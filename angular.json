@@ -112,7 +112,6 @@
       }
     }
   },
-  "defaultProject": "CRUD-APP",
   "cli": {
     "analytics": false
   }

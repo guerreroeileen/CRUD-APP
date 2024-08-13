@@ -7,7 +7,7 @@
         <mat-card-title>Crear persona</mat-card-title>
         <mat-card-subtitle>Todos los campos son obligatorios</mat-card-subtitle>
       </mat-card-header>
-      
+
       <mat-card class="example-card">
 
         <form [formGroup]="productForm" (ngSubmit)="submitForm()">
@@ -50,20 +50,20 @@
 
       </mat-card>
 
-      
+
     </div>
   </mat-tab>
 
   <mat-tab label="Listar">
- 
+
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource">
-    
+
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
           <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
-    
+
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef>Nombre</th>
           <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
@@ -88,16 +88,15 @@
           <th mat-header-cell *matHeaderCellDef>Documento</th>
           <td mat-cell *matCellDef="let element"> {{element.numeroDocumentoIdentificacion}} </td>
         </ng-container>
-    
 
-    
+
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-    
-      <mat-paginator [pageSizeOptions]="[10, 20, 30]"
-                     showFirstLastButtons 
-                     aria-label="Select page of periodic elements">
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons
+        aria-label="Select page of periodic elements">
       </mat-paginator>
     </div>
 
