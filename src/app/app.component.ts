@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       correo: ['', Validators.required],
       edad: [Number, Validators.required],
     });
-    this.messageInfo = "Persona agregada correctamente :)";
+    this.messageInfo = "";
     this.mostrarAlerta = false;
 
     this.CRUDServiceService.getAll(0, 10, false).subscribe(res => {
@@ -55,6 +55,7 @@ export class AppComponent implements OnInit {
       res => {
         this.dataSource.push(res);
         this.productForm.reset();
+        this.messageInfo = "Persona agregada correctamente :)";
       },
       error => {
         console.log("No se pudo guardar el producto: " + error);
